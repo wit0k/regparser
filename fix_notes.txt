@@ -1,0 +1,41 @@
+FIX 0.3.5:
+- -a, --output-format-all, Output all format fields [Time consuming task]
+- -o, outputs in escaped csv format (so a coma is escaped by double quotes)
+- setup.py - install script
+- -e, -E - Fixed a cosmetic error in registry export function
+- update to installation documentation
+
+FIX 0.3.6:
+- Fixed unnecessary double escape for exported csv file
+- Fixed an unexpected error while handling string escaping for csv file
+
+FIX 0.3.7:
+- qk: added support for recursive query with key_path\* (Just before the Christmas)
+
+FIX 0.3.8:
+- Updating autoruns loadpoints (https://attack.mitre.org/wiki/Persistence)
+- Fix for query_value_wd function
+
+FIX 0.3.9:
+- Update autorun loadpoints
+
+FIX 0.4.0:
+- Update autorun loadpoints
+
+It’s not new, but I somehow missed it … hence updating regparser autoruns plugin accordingly.
+-	Good to know while analyzing SymDiag or Ir-rescue logs.
+
+DoubleAgent: Zero-Day Code Injection and Persistence Technique
+http://cybellum.com/doubleagentzero-day-code-injection-and-persistence-technique/
+
+New entries:
+
+r"Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\VerifierDlls", # http://cybellum.com/doubleagentzero-day-code-injection-and-persistence-technique/
+r"Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\VerifierDlls"
+r"Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\Debugger", # https://blog.malwarebytes.com/101/2015/12/an-introduction-to-image-file-execution-options/
+r"Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\Debugger"
+
+
+FIX 0.5.0:
+- Fixed a problem with baseline export function (there was one column missing in initial db create statement)
+- New loadpoint: "Microsoft\Windows\CurrentVersion\App Paths\*\(default)"
