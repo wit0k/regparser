@@ -1,0 +1,6 @@
+*.pyc
+*.geany
+*.nja
+*.vd
+__pycache__
+.idea
