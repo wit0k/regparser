@@ -39,3 +39,6 @@ r"Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*
 FIX 0.5.0:
 - Fixed a problem with baseline export function (there was one column missing in initial db create statement)
 - New loadpoint: "Microsoft\Windows\CurrentVersion\App Paths\*\(default)"
+
+FIX 0.6.0:
+- New loadpoints: "Environment\UserInitMprLogonScript","Environment\UserInitLogonServer","Environment\UserInitLogonScript" (Ref: http://www.hexacorn.com/blog/2014/11/14/beyond-good-ol-run-key-part-18/)

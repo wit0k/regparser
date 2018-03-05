@@ -82,7 +82,10 @@ class autoruns(object):
         r"Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\VerifierDlls"
         r"Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\Debugger", # https://blog.malwarebytes.com/101/2015/12/an-introduction-to-image-file-execution-options/
         r"Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\Debugger",
-        r"Microsoft\Windows\CurrentVersion\App Paths\*\(default)"
+        r"Microsoft\Windows\CurrentVersion\App Paths\*\(default)",
+        r"Environment\UserInitMprLogonScript",  # http://www.hexacorn.com/blog/2014/11/14/beyond-good-ol-run-key-part-18/
+        r"Environment\UserInitLogonServer",
+        r"Environment\UserInitLogonScript"
     ]
     QUERY_KEY_LIST = [
         r"Select",
