@@ -3,6 +3,7 @@ from md.parser import *
 
 """
 TO DO:
+ - https://attack.mitre.org/wiki/Technique/T1174
  - Add r"shell\open\command\*...
  - MAke Wildcard to search Microsoft\Windows\CurrentVersion\Shell\* values 
  - Review InstalledSDB (Ref: http://technet.microsoft.com/en-us/library/cc721961(v=ws.10).aspx)

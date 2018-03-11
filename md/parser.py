@@ -11,6 +11,8 @@ from md.baseline import *
 
 """
 TO DO:
+- Review and update LP: https://attack.mitre.org/wiki/Technique/T1174
+- Can we use it? https://github.com/msuhanov/yarp
 - Adopt query_key_recursive / create new param
 - Adopt query_value_wd to new style
 - Add support to custom modules (Flagging suspcicious content of value name, or value contnet etc.) -> http://www.hexacorn.com/blog/2018/01/04/yet-another-way-to-hide-from-sysinternals-tools/ 
