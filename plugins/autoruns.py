@@ -3,7 +3,6 @@ from md.parser import *
 
 """
 TO DO:
- - https://attack.mitre.org/wiki/Technique/T1174
  - Add r"shell\open\command\*...
  - MAke Wildcard to search Microsoft\Windows\CurrentVersion\Shell\* values 
  - Review InstalledSDB (Ref: http://technet.microsoft.com/en-us/library/cc721961(v=ws.10).aspx)
@@ -140,7 +139,11 @@ class autoruns(object):
         r"Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Custom\*",
         r"Software\Microsoft\Office test\Special\Perf\*",
         r"Software\Microsoft\Windows\Windows Error Reporting\RuntimeExceptionHelperModules",  # https://msdn.microsoft.com/en-us/library/windows/desktop/dd408167(v=vs.85).aspx
-        r"Microsoft\Windows\Windows Error Reporting\RuntimeExceptionHelperModules"  # https://msdn.microsoft.com/en-us/library/windows/desktop/dd408167(v=vs.85).aspx
+        r"Microsoft\Windows\Windows Error Reporting\RuntimeExceptionHelperModules",  # https://msdn.microsoft.com/en-us/library/windows/desktop/dd408167(v=vs.85).aspx
+        r"Software\Microsoft\Office Test\Special\Perf",  # http://www.hexacorn.com/blog/2014/04/16/beyond-good-ol-run-key-part-10/
+        r"ControlSet001\Control\Lsa\Notification Packages",
+        r"ControlSet002\Control\Lsa\Notification Packages",
+        r"ControlSet003\Control\Lsa\Notification Packages"  # https://attack.mitre.org/wiki/Technique/T1174
     ]
 
     def __init__(self, plugin, regparser):
