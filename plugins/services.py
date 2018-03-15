@@ -139,21 +139,41 @@ class services(object):
         return _item_fields
 
     def process_data(self, item):
-        if isinstance(item["values"], list):
-            if item["values"]:
-                for _value in item["values"]:
-                    _item = self._process_item(item["key"], _value)
-                    if _item:
+        """ Parses the input data item, match against baseline and string format etc. """
+
+        """ The data is a list of dictionaries """
+        if isinstance(item, list):
+            """ Navigate trough every element of the list """
+            for entry in item:
+                values = entry.get("values", None)
+
+                """ The entry has values"""
+                if values:
+                    for _value in values:
+                        if self._process_item(entry["key"], _value):
+                            self.objects_matched.append(
+                                {"hive": entry["hive"], "key": entry["key"], "values": _value, "plugin": self})
+                else:
+                    """ Process the key data only """
+                    if self._process_item(entry["key"]):
+                        self.objects_matched.append(
+                            {"hive": entry["hive"], "key": entry["key"], "values": None, "plugin": self})
+
+        else:
+            """ Assume the data is a dictionary """
+            values = item.get("values", None)
+
+            """ The entry has values"""
+            if values:
+                for _value in values:
+                    if self._process_item(item["key"], _value):
                         self.objects_matched.append(
                             {"hive": item["hive"], "key": item["key"], "values": _value, "plugin": self})
             else:
+                """ Process the key data only """
                 if self._process_item(item["key"]):
-                    self.objects_matched.append({"hive": item["hive"], "key": item["key"], "values": None, "plugin": self})
-
-        else:
-            if self._process_item(item["key"]):
-                self.objects_matched.append(
-                    {"hive": item["hive"], "key": item["key"], "values": item["values"], "plugin": self})
+                    self.objects_matched.append(
+                        {"hive": item["hive"], "key": item["key"], "values": None, "plugin": self})
 
     def _process_item(self, key, value=None):
         """ Return registry value according to plugin mode  """

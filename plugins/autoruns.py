@@ -83,6 +83,7 @@ class autoruns(object):
         r"Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\Debugger", # https://blog.malwarebytes.com/101/2015/12/an-introduction-to-image-file-execution-options/
         r"Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\Debugger",
         r"Microsoft\Windows\CurrentVersion\App Paths\*\(default)",
+        r"Microsoft\Windows\CurrentVersion\App Paths\wmplayer.exe\Path",  # http://www.hexacorn.com/blog/2018/03/15/beyond-good-ol-run-key-part-73/
         r"Environment\UserInitMprLogonScript",  # http://www.hexacorn.com/blog/2014/11/14/beyond-good-ol-run-key-part-18/
         r"Environment\UserInitLogonServer",
         r"Environment\UserInitLogonScript"
@@ -180,24 +181,47 @@ class autoruns(object):
         objects_matched.extend(self.regparser.query_value_wd(registry_hive.file_path, values, registry_hive, True))
         objects_matched.extend(self.regparser.query_key(registry_hive.file_path, keys, registry_hive, True))
 
+        len2 = registry_hive.file_path
+        len1 = len(self.regparser.objects_matched.items)
+
         return objects_matched
 
     def process_data(self, item):
-        if isinstance(item["values"], list):
-            if item["values"]:
-                for _value in item["values"]:
-                    _item = self._process_item(item["key"], _value)
-                    if _item:
+        """ Parses the input data item, match against baseline and string format etc. """
+
+        """ The data is a list of dictionaries """
+        if isinstance(item, list):
+            """ Navigate trough every element of the list """
+            for entry in item:
+                values = entry.get("values", None)
+
+                """ The entry has values"""
+                if values:
+                    for _value in values:
+                        if self._process_item(entry["key"], _value):
+                            self.objects_matched.append(
+                                {"hive": entry["hive"], "key": entry["key"], "values": _value, "plugin": self})
+                else:
+                    """ Process the key data only """
+                    if self._process_item(entry["key"]):
+                        self.objects_matched.append(
+                            {"hive": entry["hive"], "key": entry["key"], "values": None, "plugin": self})
+
+        else:
+            """ Assume the data is a dictionary """
+            values = item.get("values", None)
+
+            """ The entry has values"""
+            if values:
+                for _value in values:
+                    if self._process_item(item["key"], _value):
                         self.objects_matched.append(
                             {"hive": item["hive"], "key": item["key"], "values": _value, "plugin": self})
             else:
+                """ Process the key data only """
                 if self._process_item(item["key"]):
-                    self.objects_matched.append({"hive": item["hive"], "key": item["key"], "values": None, "plugin": self})
-
-        else:
-            if self._process_item(item["key"]):
-                self.objects_matched.append(
-                    {"hive": item["hive"], "key": item["key"], "values": item["values"], "plugin": self})
+                    self.objects_matched.append(
+                        {"hive": item["hive"], "key": item["key"], "values": None, "plugin": self})
 
     def _process_item(self, key, value=None):
         """ Return registry value according to plugin mode  """
@@ -205,6 +229,13 @@ class autoruns(object):
         """ Remove the hive root """
         _root, _, _key_path = key.path().partition("\\")
         #_root, _, _key_path = _key_path.partition("\\")  # Removes ControlSetXXX string
+
+        #Debug:
+        if r"Microsoft\NetSh" in _key_path:
+            test = ""
+
+
+
         """ Check item type """
         if value:
             _value_name = value.name()
@@ -229,6 +260,8 @@ class autoruns(object):
         else:
                 return item
 
+        test = ""
+
     def execute(self):
 
         objects_matched = []
@@ -250,7 +283,8 @@ class autoruns(object):
 
         """ Parse data """
         for item in objects_matched:
-            self.process_data(item)
+            if item:
+                self.process_data(item)
 
         """ Print all """
         self.regparser.objects_matched.extend(self.objects_matched)

@@ -609,7 +609,7 @@ class parser(object):
 
                             for _sub_key in _sub_keys:
                                 try:
-                                    self.debug_print(f'- QUERY VALUE -> {_sub_key.path()}\\{_value_name}')
+                                    self.debug_print(f'- QUERY VALUE -> %s\%s' % (_sub_key.path(), _value_name))
                                     _value = _sub_key.value(_value_name)
 
                                     if _value:
@@ -636,7 +636,8 @@ class parser(object):
                                 f'{registry_hive.file_path} -> {_key_path}: "No subkeys found!')
 
                     else:
-                        self.query_value(hive_file, [_key_value], registry_hive, return_result)
+                        result = self.query_value(hive_file, [_key_value], registry_hive, return_result)
+                        values.append(result)
 
 
                 except Registry.RegistryKeyNotFoundException:
@@ -665,7 +666,7 @@ class parser(object):
 
                 _key_path, _, _value_name = _key_value.rpartition("\\")
 
-                self.debug_print(f"- QUERY VALUE: {registry_hive.file_name}\{_key_value}")
+                self.debug_print(f"- QUERY VALUE: %s\%s" % (registry_hive.file_name, _key_value))
                 try:
                     key = registry_hive.reg.open(_key_path)
                 except Registry.RegistryKeyNotFoundException:
@@ -720,16 +721,15 @@ class parser(object):
                 return _keys
 
             for _key in keys:
-
                 """ Wildcard check - Case: Recursive query """
                 recursive = False
                 if r'\*' in _key:
                     _key, _, junk = _key.rpartition("*")
                     _key = _key[:-1]
-                    self.debug_print(f"- QUERY KEY (Recursive): {registry_hive.file_name}\{_key}")
+                    self.debug_print(f"- QUERY KEY (Recursive): %s\%s" % (registry_hive.file_name, _key))
                     recursive = True
                 else:
-                    self.debug_print(f"- QUERY KEY: {registry_hive.file_name}\{_key}")
+                    self.debug_print(f"- QUERY KEY: %s\%s" % (registry_hive.file_name, _key))
 
                 try:
                     key = registry_hive.reg.open(_key)
@@ -739,7 +739,8 @@ class parser(object):
 
                 if recursive:
                     self.query_key_recursive(registry_hive, key, _keys)
-                    self.objects_matched.extend(_keys)
+                    if not return_result:
+                        self.objects_matched.extend(_keys)
                     continue
 
                 values = []

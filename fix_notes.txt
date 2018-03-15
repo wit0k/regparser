@@ -46,3 +46,8 @@ FIX 0.6.0:
 FIX 0.7.0:
 - New loadpoint: r"Software\Microsoft\Office Test\Special\Perf" (Ref: http://www.hexacorn.com/blog/2014/04/16/beyond-good-ol-run-key-part-10/)
 - New loadpoint: r"ControlSet003\Control\Lsa\Notification Packages"  (Ref: https://attack.mitre.org/wiki/Technique/T1174)
+
+FIX 0.7.1:
+- New loadpoint: r"Microsoft\Windows\CurrentVersion\App Paths\wmplayer.exe\Path" (Ref: http://www.hexacorn.com/blog/2018/03/15/beyond-good-ol-run-key-part-73/)
+- FIX: The function process_data() ... i am not sure how it could work before, but it somehow did ;-), anyway it is fixed now.
+- FIX: Code fix in query_key() function
