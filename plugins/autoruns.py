@@ -3,6 +3,8 @@ from md.parser import *
 
 """
 TO DO:
+ - Review and update LP: https://attack.mitre.org/wiki/Technique/T1174
+ - Review LP: http://www.silentrunners.org/launchpoints.html
  - Add r"shell\open\command\*...
  - MAke Wildcard to search Microsoft\Windows\CurrentVersion\Shell\* values 
  - Review InstalledSDB (Ref: http://technet.microsoft.com/en-us/library/cc721961(v=ws.10).aspx)
@@ -30,6 +32,8 @@ class autoruns(object):
         r"Microsoft\Windows NT\CurrentVersion\Windows\Run",
         r"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run",
         r"Microsoft\Windows\CurrentVersion\Policies\Explorer\Run",
+        r"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run\*",
+        r"Microsoft\Windows\CurrentVersion\Policies\Explorer\Run\*",
         r"Software\Microsoft\Windows\CurrentVersion\Run\COM+",
         r"Microsoft\Windows\CurrentVersion\Run\COM+",
         r"ControlSet001\Control\SafeBoot\AlternateShell",
@@ -95,6 +99,11 @@ class autoruns(object):
         r"Wow6432Node\Microsoft\Windows\CurrentVersion\Run",  # Might not exist
         r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run",
         r"Software\Microsoft\Windows NT\CurrentVersion\Run",
+        r"Software\Microsoft\Windows\CurrentVersion\Run\*",  # http://www.silentrunners.org/launchpoints.html
+        r"Microsoft\Windows\CurrentVersion\Run\*",
+        r"Wow6432Node\Microsoft\Windows\CurrentVersion\Run\*",
+        r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run\*",
+        r"Software\Microsoft\Windows NT\CurrentVersion\Run\*",
         r"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run",
         r"Microsoft\Windows\CurrentVersion\Policies\Explorer\Run",
         r"Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run",
@@ -103,14 +112,22 @@ class autoruns(object):
         r"Microsoft\Windows\CurrentVersion\RunOnce",
         r"Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce",
         r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce",
+        r"Microsoft\Windows\CurrentVersion\RunOnceEx",
+        r"Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx",
+        r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx",
+        r"Software\Microsoft\Windows\CurrentVersion\RunOnceEx",
+        r"Software\Microsoft\Windows\CurrentVersion\RunOnce\*",  # http://www.silentrunners.org/launchpoints.html
+        r"Microsoft\Windows\CurrentVersion\RunOnce\*",
+        r"Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce\*",
+        r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce\*",
+        r"Microsoft\Windows\CurrentVersion\RunOnceEx\*",
+        r"Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx\*",
+        r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx\*",
+        r"Software\Microsoft\Windows\CurrentVersion\RunOnceEx\*",
         r"Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\Software\Microsoft\Windows\CurrentVersion\RunOnce",
         r"Software\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\Software\Microsoft\Windows\CurrentVersion\RunOnce",
         r"Wow6432Node\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\Software\Microsoft\Windows\CurrentVersion\RunOnce",
         r"Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\Software\Microsoft\Windows\CurrentVersion\RunOnce",
-        r"Software\Microsoft\Windows\CurrentVersion\RunOnceEx",
-        r"Microsoft\Windows\CurrentVersion\RunOnceEx",
-        r"Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx",
-        r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx",
         r"Software\Microsoft\Windows\CurrentVersion\RunServices",
         r"Microsoft\Windows\CurrentVersion\RunServices",
         r"Wow6432Node\Microsoft\Windows\CurrentVersion\RunServices",

@@ -51,3 +51,6 @@ FIX 0.7.1:
 - New loadpoint: r"Microsoft\Windows\CurrentVersion\App Paths\wmplayer.exe\Path" (Ref: http://www.hexacorn.com/blog/2018/03/15/beyond-good-ol-run-key-part-73/)
 - FIX: The function process_data() ... i am not sure how it could work before, but it somehow did ;-), anyway it is fixed now.
 - FIX: Code fix in query_key() function
+
+FIX 0.7.2:
+- New loadpoint: "\Run\*", "\RunOnce\*", "Explorer\Run\*" ... According to the source, these ASEPs do support sub-folders (Ref: http://www.silentrunners.org/launchpoints.html)

@@ -11,7 +11,6 @@ from md.baseline import *
 
 """
 TO DO:
-- Review and update LP: https://attack.mitre.org/wiki/Technique/T1174
 - Can we use it? https://github.com/msuhanov/yarp
 - Adopt query_key_recursive / create new param
 - Adopt query_value_wd to new style
