@@ -1,4 +1,4 @@
-# RegParser - 0.7.1 [BETA]
+# RegParser [BETA]
 
 #### Description:
 

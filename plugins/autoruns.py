@@ -90,8 +90,11 @@ class autoruns(object):
         r"Microsoft\Windows\CurrentVersion\App Paths\wmplayer.exe\Path",  # http://www.hexacorn.com/blog/2018/03/15/beyond-good-ol-run-key-part-73/
         r"Environment\UserInitMprLogonScript",  # http://www.hexacorn.com/blog/2014/11/14/beyond-good-ol-run-key-part-18/
         r"Environment\UserInitLogonServer",
-        r"Environment\UserInitLogonScript"
+        r"Environment\UserInitLogonScript",
+        r"Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\GlobalFlag",  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
+        r"Microsoft\Windows NT\CurrentVersion\SilentProcessExit\*\MonitorProcess"  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
     ]
+
     QUERY_KEY_LIST = [
         r"Select",
         r"Software\Microsoft\Windows\CurrentVersion\Run",
@@ -122,7 +125,7 @@ class autoruns(object):
         r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce\*",
         r"Microsoft\Windows\CurrentVersion\RunOnceEx\*",
         r"Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx\*",
-        r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx\*",
+        r"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceEx\*",  # https://oddvar.moe/2018/03/21/persistence-using-runonceex-hidden-from-autoruns-exe/
         r"Software\Microsoft\Windows\CurrentVersion\RunOnceEx\*",
         r"Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\Software\Microsoft\Windows\CurrentVersion\RunOnce",
         r"Software\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\Software\Microsoft\Windows\CurrentVersion\RunOnce",
