@@ -561,7 +561,6 @@ class parser(object):
             return None
 
     """     ---------  Registry Querying  ---------     """
-
     # (self, hive_file, key_value_strings, registry_hive = None, return_result = False)
     def query_value_wd(self, hive_file, key_value_strings, registry_hive = None, return_result = False):
     # def query_value_wd(self, hive_file, key_value_strings):
@@ -670,7 +669,7 @@ class parser(object):
                     key = registry_hive.reg.open(_key_path)
                 except Registry.RegistryKeyNotFoundException:
                     self.debug_print(
-                        f'{registry_hive.file_path} -> {_key_path}: "ERROR_PARSER_KEY_NOT_FOUND')
+                        '{registry_hive.file_path} -> %s: "ERROR_PARSER_KEY_NOT_FOUND' % registry_hive.file_path)
                     continue
 
                 try:

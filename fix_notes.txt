@@ -58,3 +58,6 @@ FIX 0.7.2:
 FIX 0.7.3:
 - New loadpoint: r"Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\GlobalFlag",  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
 - New loadpoint: r"Microsoft\Windows NT\CurrentVersion\SilentProcessExit\*\MonitorProcess"  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
+
+FIX 0.7.4:
+- r"Software\Microsoft\HtmlHelp Author\location"  # http://www.hexacorn.com/blog/2018/04/22/beyond-good-ol-run-key-part-76/

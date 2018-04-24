@@ -1,5 +1,5 @@
 __author__  = "Witold Lawacz (wit0k)"
-__version__ = '0.7.3'
+__version__ = '0.7.4'
 __released__ = "11.04.2018"
 
 import argparse
@@ -76,7 +76,7 @@ def main(argv):
     output_args.add_argument("-E", "--export-registry-file", action='store', dest='export_file', required=False,
                              default="", help='File path for exported single .reg file')
     output_args.add_argument("-f", "--output-format", action='store', dest='output_format', required=False,
-                             default="plugin_name,hive_name,key_timestamp,special,key_path,value_name,value_content", help='Format of output data: field,field,field')
+                             default="plugin_name,hive_name,key_timestamp,special,key_subkeys,key_values,key_path,value_name,value_content", help='Format of output data: field,field,field')
     output_args.add_argument("-d", "--output-delimiter", action='store', dest='field_delimiter', required=False,
                              default=",", help='Used to separate the output fields (Default: ","')
 
