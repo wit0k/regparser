@@ -8,12 +8,12 @@ TO DO:
 
 - Fix the issue with printing results from the plugin:
  
-            The code causing the issue from python registry:
-                if self.has_ascii_name():
-                    return unpacked_string.decode("windows-1252")
-                return unpacked_string.decode("utf-16le")
+    The code causing the issue from python registry:
+        if self.has_ascii_name():
+            return unpacked_string.decode("windows-1252")
+        return unpacked_string.decode("utf-16le")
             
-            Windows prints the utf-16le but not the Mac!
+    Windows prints the utf-16le but not the Mac!
 """
 
 
@@ -70,6 +70,13 @@ class macro(object):
             Windows prints the utf-16le but not the Mac!
         """
         value_name = _item_fields.get('value_name', None)
+        value_content = _item_fields.get('value_content', None)
+
+        if value_content:
+            if value_content.endswith(b'\xff\xff\xff\x7f'):
+                _item_fields["special"] = "Macro executed"
+            else:
+                _item_fields["special"] = "Macro not executed"
 
         if value_name:
             pass
