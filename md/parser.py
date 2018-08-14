@@ -11,6 +11,7 @@ from md.baseline import *
 
 """
 TO DO:
+- Create a plugin: http://www.hexacorn.com/blog/2018/08/04/beyond-good-ol-run-key-part-83/
 - Can we use it? https://github.com/msuhanov/yarp
 - Adopt query_key_recursive / create new param
 - Adopt query_value_wd to new style

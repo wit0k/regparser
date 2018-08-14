@@ -3,6 +3,7 @@ from md.parser import *
 
 """
 TO DO:
+ - Update code: http://www.hexacorn.com/blog/2018/07/06/beyond-good-ol-run-key-part-80/
  - Review and update LP: https://attack.mitre.org/wiki/Technique/T1174
  - Review LP: http://www.silentrunners.org/launchpoints.html
  - Add r"shell\open\command\*...
