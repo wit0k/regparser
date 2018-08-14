@@ -41,7 +41,27 @@ class macro(object):
         r"Software\Microsoft\Office\12.0\Word\Security\Trusted Documents\TrustRecords",
         r"Software\Microsoft\Office\14.0\Word\Security\Trusted Documents\TrustRecords",
         r"Software\Microsoft\Office\15.0\Word\Security\Trusted Documents\TrustRecords",
-        r"Software\Microsoft\Office\16.0\Word\Security\Trusted Documents\TrustRecords"
+        r"Software\Microsoft\Office\16.0\Word\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\11.0\Excel\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\12.0\Excel\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\14.0\Excel\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\15.0\Excel\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\16.0\Excel\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\11.0\PowerPoint\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\12.0\PowerPoint\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\14.0\PowerPoint\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\15.0\PowerPoint\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\16.0\PowerPoint\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\11.0\Publisher\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\12.0\Publisher\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\14.0\Publisher\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\15.0\Publisher\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\16.0\Publisher\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\11.0\Access\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\12.0\Access\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\14.0\Access\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\15.0\Access\Security\Trusted Documents\TrustRecords",
+        r"Software\Microsoft\Office\16.0\Access\Security\Trusted Documents\TrustRecords"
     ]
 
     def __init__(self, plugin, regparser):

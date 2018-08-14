@@ -4,6 +4,9 @@
 The tool takes following registry hives as input:
 - UsrClass.dat <- HKEY_CURRENT_USER\Software\Classes
 
+TO DO:
+- http://www.hexacorn.com/blog/2018/04/23/beyond-good-ol-run-key-part-77/
+
 """
 import argparse
 import logging
