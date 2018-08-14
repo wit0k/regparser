@@ -1,5 +1,5 @@
 __author__ = "Witold Lawacz (wit0k)"
-__version__ = '0.7.4'
+__version__ = '0.7.5'
 __released__ = "11.04.2018"
 
 import argparse

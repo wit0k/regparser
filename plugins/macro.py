@@ -1,11 +1,18 @@
+"""
+References:
+
+https://outflank.nl/blog/2018/01/16/hunting-for-evil-detect-macros-being-executed/
+http://az4n6.blogspot.com/2016/02/more-on-trust-records-macros-and.html
+
+"""
+
 import argparse
 from md.parser import *
-
-import sys
 
 """
 TO DO:
 
+- Check if the same security settings apply to Excel and Power Point etc.
 - Fix the issue with printing results from the plugin:
  
     The code causing the issue from python registry:
@@ -14,6 +21,9 @@ TO DO:
         return unpacked_string.decode("utf-16le")
             
     Windows prints the utf-16le but not the Mac!
+    
+- Update readme and the version number etc.
+
 """
 
 

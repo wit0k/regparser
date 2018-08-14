@@ -61,3 +61,6 @@ FIX 0.7.3:
 
 FIX 0.7.4:
 - r"Software\Microsoft\HtmlHelp Author\location"  # http://www.hexacorn.com/blog/2018/04/22/beyond-good-ol-run-key-part-76/
+
+FIX 0.7.5:
+- New plugin: "macro". It enumerates the TrustRecords key and flags the values with labels exposed by 'special' field.
