@@ -64,3 +64,6 @@ FIX 0.7.4:
 
 FIX 0.7.5:
 - New plugin: "macro". It enumerates the TrustRecords key and flags the values with labels exposed by 'special' field.
+
+FIX 0.7.6:
+- Plugin "macro". Added the coverage for Word, Excel, PowerPoint, Publisher, Access
