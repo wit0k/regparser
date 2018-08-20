@@ -14,18 +14,6 @@ from md.parser import *
 """
 TO DO:
 
-- Check if the same security settings apply to Excel and Power Point etc.
-- Fix the issue with printing results from the plugin:
- 
-    The code causing the issue from python registry:
-        if self.has_ascii_name():
-            return unpacked_string.decode("windows-1252")
-        return unpacked_string.decode("utf-16le")
-            
-    Windows prints the utf-16le but not the Mac!
-    
-- Update readme and the version number etc.
-
 """
 
 
@@ -92,6 +80,17 @@ class macro(object):
 
     # The code taken from: https://github.com/DidierStevens/DidierStevensSuite/blob/master/oledump.py
     def ExtractStringsUNICODE(self, data):
+        """
+        - Fix the issue with printing results from the plugin:
+
+        The code causing the issue from python registry:
+            if self.has_ascii_name():
+                return unpacked_string.decode("windows-1252")
+            return unpacked_string.decode("utf-16le")
+
+        Windows prints the utf-16le but not the Mac!
+        """
+
         REGEX_STANDARD = '[\x09\x20-\x7E]'
         regex = '((' + REGEX_STANDARD + '\x00){%d,})'
         return [foundunicodestring.replace('\x00', '') for foundunicodestring, dummy in re.findall(regex % 4, data)]
