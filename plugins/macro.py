@@ -6,7 +6,9 @@ http://az4n6.blogspot.com/2016/02/more-on-trust-records-macros-and.html
 
 """
 
+
 import argparse
+import urllib.parse as ul
 from md.parser import *
 
 """
@@ -88,6 +90,23 @@ class macro(object):
             """ Load the base line file """
             self.baseline = baseline(self.baseline_file, self.compare_fields)
 
+    # The code taken from: https://github.com/DidierStevens/DidierStevensSuite/blob/master/oledump.py
+    def ExtractStringsUNICODE(self, data):
+        REGEX_STANDARD = '[\x09\x20-\x7E]'
+        regex = '((' + REGEX_STANDARD + '\x00){%d,})'
+        return [foundunicodestring.replace('\x00', '') for foundunicodestring, dummy in re.findall(regex % 4, data)]
+
+
+    def _unescape(self, data):
+
+        if data:
+            _str = ul.unquote_plus(data)
+
+            _str.replace(r'%20', r' ')
+            return _str
+        else:
+            return ""
+
     def format_data(self, _item_fields):
         """ Adjust _item_fields - from parser._print_item """
 
@@ -102,15 +121,23 @@ class macro(object):
         value_name = _item_fields.get('value_name', None)
         value_content = _item_fields.get('value_content', None)
 
+        if value_name:
+            unicode_str = self.ExtractStringsUNICODE(value_name)
+
+            if unicode_str:
+                unicode_str = "".join(unicode_str)
+                unicode_str = self._unescape(unicode_str)
+                _item_fields['value_name'] = unicode_str
+            else:
+                value_name = self._unescape(value_name)
+                _item_fields['value_name'] = value_name
+
         if value_content:
             if value_content.endswith(b'\xff\xff\xff\x7f'):
                 _item_fields["special"] = "Macro executed"
             else:
                 _item_fields["special"] = "Macro not executed"
 
-        if value_name:
-            pass
-        
         return _item_fields
 
     def pull_data(self, keys, values, registry_hive):

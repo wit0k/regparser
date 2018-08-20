@@ -67,3 +67,6 @@ FIX 0.7.5:
 
 FIX 0.7.6:
 - Plugin "macro". Added the coverage for Word, Excel, PowerPoint, Publisher, Access
+
+FIX 0.7.7:
+- Plugin "macro". Fixed the encoding issue on Linux/MAC. From now on, all data pulled from registry value name (in this plugin) will be automatically unquoted and represented in form of human readable string.
