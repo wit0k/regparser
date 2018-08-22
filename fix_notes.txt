@@ -70,3 +70,64 @@ FIX 0.7.6:
 
 FIX 0.7.7:
 - Plugin "macro". Fixed the encoding issue on Linux/MAC. From now on, all data pulled from registry value name (in this plugin) will be automatically unquoted and represented in form of human readable string.
+
+FIX 0.7.8:
+- Plugin "macro" - Before querying the registry data it checks the loaded hive type, and proceeds only when supported type is detected (Speeds up bulk analysis when loading multiple hives)
+- Plugin "apt" - Experimental support. The plugin is the only one without a baseline support on purpose.
+- Plugin "apt" - Added first #1 rule to detection set (Ref: http://www.hexacorn.com/blog/2018/08/18/lateral-movement-using-wshcontroller-wshremote-objects-iwshcontroller-and-iwshremote-interfaces/)
+
+Basically the rule #1 says, search only in hives of type "SOFTWARE", for the reg value: Microsoft\Windows Script Host\Settings\Remote set to 1.
+If the match is found, query and display all values from the list of registry keys associated with wscript.exe -regserver command (See referenced article for more details)
+
+Example:
+
+Rule:
+
+'#1': {
+            'hive_type': 'SOFTWARE',
+            'value_name_path': 'Microsoft\Windows Script Host\Settings\Remote',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2Ppcu3d',  # http://www.hexacorn.com/blog/2018/08/18/lateral-movement-using-wshcontroller-wshremote-objects-iwshcontroller-and-iwshremote-interfaces/
+            'decoder': None,
+            'action': {'name': 'query_keys', 'items': [
+                r'Classes\CLSID\{6F201542-B482-11D2-A250-00104BD35090}\*',
+                r'Classes\Interface\{6F201541-B482-11D2-A250-00104BD35090}\*',
+                r'Classes\Interface\{83EA33C0-CD14-11D2-A252-00104BD35090}\*',
+                r'Classes\Interface\{8A9EA2C0-D348-11D2-A253-00104BD35090}\*',
+                r'Classes\TypeLib\{6F201540-B482-11D2-A250-00104BD35090}\*',
+                r'Classes\WSHRemote\*']}
+        }
+
+Usage:
+
+rp.py -s hives/ -p apt
+
+Output:
+
+apt,software,2018-08-22 10:20:45.828125 UTC,#1 | The registry value shall NOT exist, but was found | Reference: https://bit.ly/2Ppcu3d,0,5,Microsoft\Windows Script Host\Settings,Remote,1
+apt,software,2018-08-22 10:20:30.828125 UTC,#1,4,1,Classes\CLSID\{6F201542-B482-11D2-A250-00104BD35090},(default),WSHRemote
+apt,software,2018-08-22 10:20:30.828125 UTC,#1,0,1,Classes\CLSID\{6F201542-B482-11D2-A250-00104BD35090}\LocalServer32,(default),C:\Windows\system32\wscript.exe
+apt,software,2018-08-22 10:20:30.828125 UTC,#1,0,1,Classes\CLSID\{6F201542-B482-11D2-A250-00104BD35090}\ProgID,(default),WSHRemote
+apt,software,2018-08-22 10:20:30.828125 UTC,#1,0,1,Classes\CLSID\{6F201542-B482-11D2-A250-00104BD35090}\TypeLib,(default),{6F201540-B482-11D2-A250-00104BD35090}
+apt,software,2018-08-22 10:20:30.828125 UTC,#1,0,1,Classes\CLSID\{6F201542-B482-11D2-A250-00104BD35090}\Version,(default),1.0
+apt,software,2018-08-22 10:20:30.812498 UTC,#1,2,1,Classes\Interface\{6F201541-B482-11D2-A250-00104BD35090},(default),IWSHRemote
+apt,software,2018-08-22 10:20:30.812498 UTC,#1,0,1,Classes\Interface\{6F201541-B482-11D2-A250-00104BD35090}\ProxyStubClsid32,(default),{00020424-0000-0000-C000-000000000046}
+apt,software,2018-08-22 10:20:30.812498 UTC,#1,0,2,Classes\Interface\{6F201541-B482-11D2-A250-00104BD35090}\TypeLib,(default),{6F201540-B482-11D2-A250-00104BD35090}
+apt,software,2018-08-22 10:20:30.812498 UTC,#1,0,2,Classes\Interface\{6F201541-B482-11D2-A250-00104BD35090}\TypeLib,Version,1.0
+apt,software,2018-08-22 10:20:30.812498 UTC,#1,2,1,Classes\Interface\{83EA33C0-CD14-11D2-A252-00104BD35090},(default),IWSHRemoteEvents
+apt,software,2018-08-22 10:20:30.812498 UTC,#1,0,1,Classes\Interface\{83EA33C0-CD14-11D2-A252-00104BD35090}\ProxyStubClsid32,(default),{00020420-0000-0000-C000-000000000046}
+apt,software,2018-08-22 10:20:30.812498 UTC,#1,0,2,Classes\Interface\{83EA33C0-CD14-11D2-A252-00104BD35090}\TypeLib,(default),{6F201540-B482-11D2-A250-00104BD35090}
+apt,software,2018-08-22 10:20:30.812498 UTC,#1,0,2,Classes\Interface\{83EA33C0-CD14-11D2-A252-00104BD35090}\TypeLib,Version,1.0
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,2,1,Classes\Interface\{8A9EA2C0-D348-11D2-A253-00104BD35090},(default),IWSHRemoteError
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,0,1,Classes\Interface\{8A9EA2C0-D348-11D2-A253-00104BD35090}\ProxyStubClsid32,(default),{00020424-0000-0000-C000-000000000046}
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,0,2,Classes\Interface\{8A9EA2C0-D348-11D2-A253-00104BD35090}\TypeLib,(default),{6F201540-B482-11D2-A250-00104BD35090}
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,0,2,Classes\Interface\{8A9EA2C0-D348-11D2-A253-00104BD35090}\TypeLib,Version,1.0
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,1,0,Classes\TypeLib\{6F201540-B482-11D2-A250-00104BD35090},,
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,3,1,Classes\TypeLib\{6F201540-B482-11D2-A250-00104BD35090}\1.0,(default),WSHRemoteLibrary
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,1,0,Classes\TypeLib\{6F201540-B482-11D2-A250-00104BD35090}\1.0\0,,
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,0,1,Classes\TypeLib\{6F201540-B482-11D2-A250-00104BD35090}\1.0\0\win64,(default),C:\Windows\system32\wscript.exe\2
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,0,1,Classes\TypeLib\{6F201540-B482-11D2-A250-00104BD35090}\1.0\FLAGS,(default),4
+apt,software,2018-08-22 10:20:30.796875 UTC,#1,0,1,Classes\TypeLib\{6F201540-B482-11D2-A250-00104BD35090}\1.0\HELPDIR,(default),C:\Windows\system32
+apt,software,2018-08-22 10:20:30.828125 UTC,#1,1,0,Classes\WSHRemote,,
+apt,software,2018-08-22 10:20:30.828125 UTC,#1,0,1,Classes\WSHRemote\CLSID,(default),{6F201542-B482-11D2-A250-00104BD35090}

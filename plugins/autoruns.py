@@ -253,12 +253,6 @@ class autoruns(object):
         _root, _, _key_path = key.path().partition("\\")
         #_root, _, _key_path = _key_path.partition("\\")  # Removes ControlSetXXX string
 
-        #Debug:
-        if r"Microsoft\NetSh" in _key_path:
-            test = ""
-
-
-
         """ Check item type """
         if value:
             _value_name = value.name()

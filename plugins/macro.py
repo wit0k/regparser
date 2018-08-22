@@ -147,9 +147,6 @@ class macro(object):
         #objects_matched.extend(self.regparser.query_value_wd(registry_hive.file_path, values, registry_hive, True))
         objects_matched.extend(self.regparser.query_key(registry_hive.file_path, keys, registry_hive, True))
 
-        len2 = registry_hive.file_path
-        len1 = len(self.regparser.objects_matched.items)
-
         return objects_matched
 
     def process_data(self, item):
@@ -243,6 +240,12 @@ class macro(object):
             registry_hive = self.regparser._load_hive(hive_file)
             if not registry_hive:
                 continue
+
+            if registry_hive.hive_type.name != "NTUSER":
+                self.regparser.debug_print('INFO: Unsupported hive type: "%s". '
+                                           'Switch to the next hive' % registry_hive.hive_type.name)
+                continue
+
             """ Pull registry data """
             objects_matched.extend(self.pull_data(self.QUERY_KEY_LIST, self.QUERY_VALUE_LIST, registry_hive))
 

@@ -353,6 +353,11 @@ class parser(object):
                         try:
                             _item_fields = _plugin_obj.format_data(_item_fields)
                             _item_fields["plugin_name"] = _item_fields["plugin"].name
+
+                            if item['special']:
+                                if _item_fields["special"] != item['special']:
+                                    _item_fields["special"] = _item_fields["special"] + item['special']
+
                         except Exception:
                             self.debug_print("ERROR: _print_item() ->  format_data() failed")
 
@@ -384,6 +389,10 @@ class parser(object):
                     try:
                         all_item_fields = _plugin_obj.format_data(all_item_fields)
                         all_item_fields["plugin_name"] = all_item_fields["plugin"].name
+
+                        if item['special']:
+                            if all_item_fields["special"] != item['special']:
+                                all_item_fields["special"] = all_item_fields["special"] + item['special']
 
                     except Exception:
                         self.debug_print("ERROR: _print_item() ->  format_data() failed")
@@ -427,18 +436,20 @@ class parser(object):
                     values.append(value)
 
             try:
-                self._print_item(index, {"hive": item["hive"], "key": key, "values": values, "plugin": item["plugin"]},
+                self._print_item(index, {"hive": item["hive"], "key": key, "values": values, "plugin": item["plugin"], 'special': item.get('special', None)},
                                  self.output_format, self.field_delimiter)
             except AttributeError:
                 self.debug_print(f"ERROR: _parse_items() -> Possibly plugin related error")
             except KeyError:
-                self._print_item(index, {"hive": item["hive"], "key": key, "values": values, "plugin": None},
+                self._print_item(index, {"hive": item["hive"], "key": key, "values": values, "plugin": None, 'special': item.get('special', None)},
                                  self.output_format, self.field_delimiter)
             except Exception as e:
                 self.debug_print(f"ERROR: _parse_items() -> Unexpected exception: {str(e)}")
 
     def print_items(self):
-        self._parse_items(self.objects_matched.get_items())
+        items = self.objects_matched.get_items()
+        if items:
+            self._parse_items(items)
 
     def debug_print(self, message, prefix=""):
 
