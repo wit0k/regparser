@@ -28,15 +28,33 @@ Note: More details in **README.pdf**
 * Operating system:  Windows, Linux, MacOS
 * python-registry module (1.2.0 at least):
 
-In proxy enabled environment use: pip --proxy http://PROXY_IP:PORT install %package name% 
+In proxy enabled environment use: 
 
-* pip install --upgrade python-dateutil
-* pip install --upgrade enum34
-* pip install --upgrade unicodecsv
-* pip install --upgrade https://github.com/williballenthin/python-registry/archive/master.zip
-* wget/save RegistryParser
-* Unzip RegistryParser and run: python rp.py -h (To review all available commands)
+<pre>
+For pip:
+---------
+pip --proxy http://PROXY_IP:PORT install -U %package name% 
 
+For git:
+---------
+Add proxy support:
+
+git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
+or
+git config --global http.proxy http://proxy.server.com:port
+
+Remove proxy support:
+git config --global --unset http.proxy
+</pre>
+<pre>
+pip install -U python-dateutil
+pip install -U enum34
+pip install -U unicodecsv
+pip install -U https://github.com/williballenthin/python-registry/archive/master.zip
+git clone https://github.com/wit0k/regparser.git
+cd regparser
+python rp.py -h
+</pre>
 
 #### Parameters
 <pre>
