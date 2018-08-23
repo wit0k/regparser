@@ -37,8 +37,6 @@ git config --global http.proxy http://proxy.server.com:port
 
 REMARK: To remove proxy support: git config --global --unset http.proxy
 
-INSATALL:
-
 pip install -U pip
 pip install -U -r requirements.txt
 
