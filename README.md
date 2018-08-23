@@ -38,7 +38,8 @@ In proxy enabled environment use one of following commands:
 
 pip --proxy http://PROXY_IP:PORT install -U pip
 pip --proxy http://PROXY_IP:PORT install -U -r requirements.txt
-
+</pre>
+<pre>
 REMARK: Regarding git configuration: 
 
 To add proxy support: 
