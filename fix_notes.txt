@@ -131,3 +131,53 @@ apt,software,2018-08-22 10:20:30.796875 UTC,#1,0,1,Classes\TypeLib\{6F201540-B48
 apt,software,2018-08-22 10:20:30.796875 UTC,#1,0,1,Classes\TypeLib\{6F201540-B482-11D2-A250-00104BD35090}\1.0\HELPDIR,(default),C:\Windows\system32
 apt,software,2018-08-22 10:20:30.828125 UTC,#1,1,0,Classes\WSHRemote,,
 apt,software,2018-08-22 10:20:30.828125 UTC,#1,0,1,Classes\WSHRemote\CLSID,(default),{6F201542-B482-11D2-A250-00104BD35090}
+
+
+FIX 0.7.9:
+- Plugin "apt" - Added 3 new rules to detection set (Ref: https://www.welivesecurity.com/wp-content/uploads/2018/08/Eset-Turla-Outlook-Backdoor.pdf)
+
+
+        '#2': {
+            'author': 'wit0k',
+            'description': 'Detects a possible Turla Outlook COM Hijack (No admin rights required)',
+            'signature_category': 'COM Hijack',
+            'hive_type': 'USRCLASS',
+            'value_name_path': r'CLSID\{84DA0A92-25E0-11D3-B9F7-00C04F4C8F5D}\TreatAs',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2OXVTSP',  # https://www.welivesecurity.com/wp-content/uploads/2018/08/Eset-Turla-Outlook-Backdoor.pdf
+            'value_content_decoder': None,
+            'action': {'name': 'query_keys', 'items': [
+                r'CLSID\{49CBB1C7-97D1-485A-9EC1-A26065633066}\*',
+                r'CLSID\{84DA0A92-25E0-11D3-B9F7-00C04F4C8F5D}\*'
+            ]}
+        },
+        '#3': {
+            'author': 'wit0k',
+            'description': 'Detects a possible Turla Outlook COM Hijack (Admin rights required)',
+            'signature_category': 'COM Hijack',
+            'hive_type': 'SOFTWARE',
+            'value_name_path': r'Classes\CLSID\{84DA0A92-25E0-11D3-B9F7-00C04F4C8F5D}\TreatAs',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2OXVTSP',  # https://www.welivesecurity.com/wp-content/uploads/2018/08/Eset-Turla-Outlook-Backdoor.pdf
+            'value_content_decoder': None,
+            'action': {'name': 'query_keys', 'items': [
+                r'Classes\CLSID\{49CBB1C7-97D1-485A-9EC1-A26065633066}\*',
+                r'Classes\CLSID\{84DA0A92-25E0-11D3-B9F7-00C04F4C8F5D}\*'
+            ]}
+        },
+        '#4': {
+            'author': 'wit0k',
+            'description': 'Detects Turla Virtual File system stored in the registry',
+            'signature_category': 'Artifact',
+            'hive_type': 'NTUSER',
+            'value_name_path': r'Software\Microsoft\Windows\CurrentVersion\Settings\ZonePolicy',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2OXVTSP',  # https://www.welivesecurity.com/wp-content/uploads/2018/08/Eset-Turla-Outlook-Backdoor.pdf
+            'value_content_decoder': None,
+            'action': {'name': 'query_keys', 'items': [
+                r'Software\Microsoft\Windows\CurrentVersion\Settings\ZonePolicy\*'
+            ]}
+        }
