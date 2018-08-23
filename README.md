@@ -17,40 +17,36 @@ It comes with following major features:
 * Export results to SQLite (Used by regparser for plugin’s baseline)
 * Export results to CSV or stout
 * Customize output data (21 different format fields)
-* Easy plugin implementation and support with built in plugins like “autoruns”,”services”
+* Easy plugin implementation and support with built in plugins like “autoruns”,”services”,"apt","macro"
 * Plugins baseline support 
 
 Note: More details in **README.pdf**
 
-#### Requirements:
+#### Minimum Requirements:
 
 * Python 3.6.1 Framework 
-* Operating system:  Windows, Linux, MacOS
-* python-registry module (1.2.0 at least):
+* Operating system:  Windows, Linux, MacOS, Cygwin
 
-In proxy enabled environment use: 
 
+#### Installing Dependencies:
 <pre>
-For pip:
----------
-pip --proxy http://PROXY_IP:PORT install -U %package name% 
-
-For git:
----------
-Add proxy support:
+In proxy enabled environment use one of following commands: 
 
 git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
-or
 git config --global http.proxy http://proxy.server.com:port
 
-Remove proxy support:
-git config --global --unset http.proxy
-</pre>
-<pre>
-pip install -U python-dateutil
-pip install -U enum34
-pip install -U unicodecsv
-pip install -U https://github.com/williballenthin/python-registry/archive/master.zip
+REMARK: To remove proxy support: git config --global --unset http.proxy
+
+INSATALL:
+
+pip install -U pip
+pip install -U -r requirements.txt
+
+or 
+
+pip --proxy http://PROXY_IP:PORT install -U pip
+pip --proxy http://PROXY_IP:PORT install -U -r requirements.txt
+
 git clone https://github.com/wit0k/regparser.git
 cd regparser
 python rp.py -h
