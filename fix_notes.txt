@@ -181,3 +181,6 @@ FIX 0.7.9:
                 r'Software\Microsoft\Windows\CurrentVersion\Settings\ZonePolicy\*'
             ]}
         }
+
+FIX 0.8.0:
+- README.md update - Install and update section

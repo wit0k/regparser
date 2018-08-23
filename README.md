@@ -17,7 +17,7 @@ It comes with following major features:
 * Export results to SQLite (Used by regparser for plugin’s baseline)
 * Export results to CSV or stout
 * Customize output data (21 different format fields)
-* Easy plugin implementation and support with built in plugins like “autoruns”,”services”,"apt","macro"
+* Easy plugin implementation and support with built in plugins like "autoruns", "services", "apt", "macro"
 * Plugins baseline support 
 
 Note: More details in **README.pdf**
@@ -47,10 +47,21 @@ or
 pip --proxy http://PROXY_IP:PORT install -U pip
 pip --proxy http://PROXY_IP:PORT install -U -r requirements.txt
 
+</pre>
+
+#### Installing the program:
+<pre>
 git clone https://github.com/wit0k/regparser.git
 cd regparser
 python rp.py -h
 </pre>
+
+#### Updating the program:
+<pre>
+cd %regparser_location%
+git pull
+</pre>
+
 
 #### Parameters
 <pre>
