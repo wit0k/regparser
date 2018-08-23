@@ -30,21 +30,22 @@ Note: More details in **README.pdf**
 
 #### Installing Dependencies:
 <pre>
-In proxy enabled environment use one of following commands: 
-
-git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
-git config --global http.proxy http://proxy.server.com:port
-
-REMARK: To remove proxy support: git config --global --unset http.proxy
-
 pip install -U pip
 pip install -U -r requirements.txt
 
-or 
+In proxy enabled environment use one of following commands: 
 
 pip --proxy http://PROXY_IP:PORT install -U pip
 pip --proxy http://PROXY_IP:PORT install -U -r requirements.txt
 
+REMARK: Regarding git configuration: 
+
+To add proxy support: 
+    git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
+    git config --global http.proxy http://proxy.server.com:port
+
+To remove proxy support: 
+    git config --global --unset http.proxy
 </pre>
 
 #### Installing the program:
