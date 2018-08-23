@@ -32,7 +32,8 @@ Note: More details in **README.pdf**
 <pre>
 pip install -U pip
 pip install -U -r requirements.txt
-
+</pre>
+<pre>
 In proxy enabled environment use one of following commands: 
 
 pip --proxy http://PROXY_IP:PORT install -U pip
