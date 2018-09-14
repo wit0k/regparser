@@ -184,3 +184,6 @@ FIX 0.7.9:
 
 FIX 0.8.0:
 - README.md update - Install and update section
+
+FIX 0.8.1:
+- query_value fix, when python registry returns unexpected erros (likely due to corrupted hive)

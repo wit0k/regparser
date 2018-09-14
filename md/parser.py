@@ -610,6 +610,11 @@ class parser(object):
                             self.debug_print(
                                 f'{registry_hive.file_path} -> {_root_key}: "ERROR_PARSER_KEY_NOT_FOUND')
                             continue
+                        except Exception as msg:
+                            self.debug_print(
+                                '{registry_hive.file_path} -> %s: "Python registry internal error: %s' % (
+                                registry_hive.file_path, str(msg)))
+                            continue
 
                         """ Check if key has any subkeys """
                         if key.subkeys():
@@ -683,6 +688,10 @@ class parser(object):
                     self.debug_print(
                         '{registry_hive.file_path} -> %s: "ERROR_PARSER_KEY_NOT_FOUND' % registry_hive.file_path)
                     continue
+                except Exception as msg:
+                    self.debug_print(
+                        '{registry_hive.file_path} -> %s: "Python registry internal error: %s' % (registry_hive.file_path, str(msg)))
+                    continue
 
                 try:
                     value = key.value(_value_name)
@@ -745,6 +754,11 @@ class parser(object):
                     key = registry_hive.reg.open(_key)
                 except Registry.RegistryKeyNotFoundException:
                     self.debug_print(f'{registry_hive.file_path} -> {_key}: "ERROR_PARSER_KEY_NOT_FOUND"')
+                    continue
+                except Exception as msg:
+                    self.debug_print(
+                        '{registry_hive.file_path} -> %s: "Python registry internal error: %s' % (
+                            registry_hive.file_path, str(msg)))
                     continue
 
                 if recursive:

@@ -12,6 +12,27 @@ from md.parser import *
 
 """
 TO DO:
+- Working on http://www.hexacorn.com/blog/2018/09/02/beyond-good-ol-run-key-part-86/
+
+I worked out the correct registration process, but i am struggling to create a DLL with the right functions.
+
+[HKEY_CLASSES_ROOT\CLSID\{D19F9331-3110-11D4-991C-005004D3B3DD}]
+@="Cleaner for Windows Meta Data Files Handler"
+
+[HKEY_CLASSES_ROOT\CLSID\{D19F9331-3110-11D4-991C-005004D3B3DD}\DefaultIcon]
+@="C:\\Windows\\System32\\occache.dll,0"
+
+[HKEY_CLASSES_ROOT\CLSID\{D19F9331-3110-11D4-991C-005004D3B3DD}\InProcServer32]
+@="C:\\safe_dll\\disk_cleanup.dll"
+"ThreadingModel"="Apartment"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Windows Meta Data Files]
+@="{D19F9331-3110-11D4-991C-005004D3B3DD}"
+"AdvancedButtonText"="@C:\\Windows\\System32\\occache.dll,-1072"
+"Priority"=hex:64,00,00,00
+"Display"="Windows Meta Data Files"
+
+
 - http://www.hexacorn.com/blog/2016/11/24/beyond-good-ol-run-key-part-51/
 - http://www.hexacorn.com/blog/2018/08/17/beyond-good-ol-run-key-part-84/
 
@@ -88,10 +109,54 @@ class apt(object):
             'action': {'name': 'query_keys', 'items': [
                 r'Software\Microsoft\Windows\CurrentVersion\Settings\ZonePolicy\*'
             ]}
+        },
+        '#5': {
+            'author': 'wit0k',
+            'description': 'Malicious Disk Cleanup handler',
+            'signature_category': 'Persistence',
+            'hive_type': 'SOFTWARE',
+            'value_name_path': r'Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\*\CleanupString',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2wCu8b3',  # http://www.hexacorn.com/blog/2018/09/02/beyond-good-ol-run-key-part-86/, https://docs.microsoft.com/pl-pl/windows/desktop/lwef/disk-cleanup#registration
+            'value_content_decoder': None,
+            'action': [
+                {'name': 'query_values', 'items': [r'(default)']},
+                {'name': 'query_keys', 'items': []}
+            ]
+        },
+        '#6': {
+            'author': 'wit0k',
+            'description': 'Malicious Disk Cleanup handler',
+            'signature_category': 'Persistence',
+            'hive_type': 'SOFTWARE',
+            'value_name_path': r'Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\*\PreCleanupString',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2wCu8b3',  # http://www.hexacorn.com/blog/2018/09/02/beyond-good-ol-run-key-part-86/
+            'value_content_decoder': None,
+            'action': [
+                {'name': 'query_values', 'items': [r'(default)']},
+                {'name': 'query_keys', 'items': []}
+            ]
+        },
+        '#7': {
+            'author': 'wit0k',
+            'description': 'Malicious Disk Cleanup handler',
+            'signature_category': 'Persistence',
+            'hive_type': 'SOFTWARE',
+            'value_name_path': r'Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\*\Autorun',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2wCu8b3 ',  # http://www.hexacorn.com/blog/2018/09/02/beyond-good-ol-run-key-part-86/
+            'value_content_decoder': None,
+            'action': [
+                {'name': 'query_values', 'items': [r'(default)']},
+                {'name': 'query_keys', 'items': []}
+            ]
+
+
         }
-
-
-
     }
 
     def __init__(self, plugin, regparser):
@@ -154,8 +219,10 @@ class apt(object):
                 message = []
                 message_str = []
                 action = None
-                key_value_str = vrule.get('value_name_path', None)
+                reg_entries = []
+                reg_entry = None
 
+                key_value_str = vrule.get('value_name_path', None)
                 hive_type = vrule.get('hive_type', None)
 
                 # Apply the rule match only to supported hive types ...
@@ -170,65 +237,109 @@ class apt(object):
                 reference = vrule.get('reference', None)
                 action = vrule.get('action', None)
 
-                reg_entry = self.regparser.query_value_wd(hive_file=registry_hive.file_path, key_value_strings=[key_value_str],
+                reg_entries = self.regparser.query_value_wd(hive_file=registry_hive.file_path, key_value_strings=[key_value_str],
                                               registry_hive=registry_hive, return_result=True)
 
-                try:
-                    reg_entry = reg_entry[0][0]
-                except IndexError:
-                    reg_entry = None
+                for reg_entry in reg_entries:
+                    if reg_entry == []:
+                        reg_entry = None
+                    elif isinstance(reg_entry, list):
+                        test = "we have a pb"
+                        reg_entry = reg_entry[0]
 
-                if reg_entry is None:
-                    value_name_exist = False
-                    reg_item = None
-                else:
-                    # Case: The value exist
-                    value_name_exist = True
-                    reg_item = {"hive": reg_entry.get('hive'), "key": reg_entry.get('key'), "values": reg_entry.get('values', None), "plugin": self, 'special': ''}
-                    reg_value = reg_item.get('values', None)
 
-                    if reg_value:
-                        reg_value = reg_value[0]
-                        reg_value = reg_value.value()
+                    if reg_entry is None:
+                        value_name_exist = False
+                        reg_item = None
+                    else:
+                        # Case: The value exist
+                        value_name_exist = True
+                        reg_item = {"hive": reg_entry.get('hive'), "key": reg_entry.get('key'), "values": reg_entry.get('values', None), "plugin": self, 'special': ''}
+                        reg_value = reg_item.get('values', None)
 
-                if shall_exist == True and value_name_exist == False:
-                    message.append(f'The registry value shall exist, but was not found')
-                    message.append('Reference: ' + reference)
+                        if reg_value:
+                            reg_value = reg_value[0]
+                            reg_value = reg_value.value()
 
-                elif shall_exist == False and value_name_exist == True:
-                    # Current design does not allow the printing of entries having NULL key objects ...
-                    message.append(f'The registry value shall NOT exist, but was found')
-                    message.append('Reference: ' + reference)
+                        current_key_path = reg_item['key'].path()
+                        _, __, current_key_path = current_key_path.partition('\\')
 
-                elif shall_exist == False and value_name_exist == False:
-                    continue
-
-                elif shall_exist == True and value_name_exist == True:
-                    if reg_value != expected_value_content:
-                        message.append(f'Content mismatch: Expected value: {expected_value_content}')
+                    if shall_exist == True and value_name_exist == False:
+                        message.append(f'The registry value shall exist, but was not found')
                         message.append('Reference: ' + reference)
 
-                if reg_item:
-                    message.insert(0, vrule_id)
-                    reg_item['special'] = " | ".join(message)
-                    self.regparser.objects_matched.append(reg_item)
+                    elif shall_exist == False and value_name_exist == True:
+                        # Current design does not allow the printing of entries having NULL key objects ...
+                        message.append(f'The registry value shall NOT exist, but was found')
+                        message.append('Reference: ' + reference)
 
-                if action:
-                    if action.get('name', None) == 'query_keys':
-                        keys = action.get('items', None)
+                    elif shall_exist == False and value_name_exist == False:
+                        continue
 
-                        if keys:
-                            for key in keys:
-                                key_entry = self.regparser.query_key(registry_hive.file_path, [key],
-                                                                     registry_hive=registry_hive, return_result=True)
-                                if key_entry is not [[]]:
+                    elif shall_exist == True and value_name_exist == True:
+                        if reg_value != expected_value_content:
+                            message.append(f'Content mismatch: Expected value: {expected_value_content}')
+                            message.append('Reference: ' + reference)
 
-                                    for _entry in key_entry:
-                                        _entry['special'] = vrule_id
-                                        _entry['plugin'] = self
+                    if reg_item:
+                        message.insert(0, vrule_id)
+                        reg_item['special'] = " | ".join(message)
+                        self.regparser.objects_matched.append(reg_item)
 
-                                    self.regparser.objects_matched.extend(key_entry)
+                    action = vrule.get('action', None)
+                    if action:
+                        if isinstance(action, dict):
+                            actions = [action]
+                        else:
+                            actions = action
 
+                        for action in actions:
+
+                            if action.get('name', None) == 'query_keys':
+                                keys = action.get('items', None)
+
+                                if keys:
+                                    for key in keys:
+                                        key_entry = self.regparser.query_key(registry_hive.file_path, [key],
+                                                                             registry_hive=registry_hive, return_result=True)
+                                        if key_entry is not [[]]:
+
+                                            for _entry in key_entry:
+                                                _entry['special'] = vrule_id
+                                                _entry['plugin'] = self
+
+                                            self.regparser.objects_matched.extend(key_entry)
+
+                            if action.get('name', None) == 'query_values':
+                                values = action.get('items', None)
+
+                                if values:
+                                    for value in values:
+                                        _key_value_str = "%s\\%s" % (current_key_path, value)
+                                        value_entry = self.regparser.query_value_wd(hive_file=registry_hive.file_path,
+                                                                                    key_value_strings=[_key_value_str],
+                                                                                    registry_hive=registry_hive,
+                                                                                    return_result=True)
+
+                                        if value_entry != [[]]:
+                                            for _entry in value_entry:
+                                                if isinstance(_entry, list):
+                                                    for child_entry in _entry:
+                                                        child_entry['special'] = vrule_id
+                                                        child_entry['plugin'] = self
+
+                                                        self.regparser.objects_matched.append(child_entry)
+                                                else:
+                                                    _entry['special'] = vrule_id
+                                                    _entry['plugin'] = self
+
+                                                    self.regparser.objects_matched.extend(value_entry)
+
+                    message = []
+                    keys = []
+                    action = None
+                    reg_item = {}
+                    _key_value_str = None
 
 
         """ Print matched items """

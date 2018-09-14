@@ -105,9 +105,6 @@ class registry(object):
 
     """     ---------  Format functions ---------     """
     def _reg_sz(self, value):
-        """
-        @rtype: str
-        """
         return "\"{value}\"".format(value=value.value())
 
     def _reg_qword(self, value):
