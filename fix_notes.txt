@@ -187,3 +187,4 @@ FIX 0.8.0:
 
 FIX 0.8.1:
 - query_value fix, when python registry returns unexpected erros (likely due to corrupted hive)
+- Some new apt rules
