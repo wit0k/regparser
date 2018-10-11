@@ -188,3 +188,6 @@ FIX 0.8.0:
 FIX 0.8.1:
 - query_value fix, when python registry returns unexpected erros (likely due to corrupted hive)
 - Some new apt rules
+
+FIX 0.8.2:
+- Autoruns: r"Microsoft\PushRouter\Test\TestDllPath2"  # http://www.hexacorn.com/blog/2018/10/10/beyond-good-ol-run-key-part-91/

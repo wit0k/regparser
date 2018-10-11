@@ -95,7 +95,8 @@ class autoruns(object):
         r"Environment\UserInitLogonScript",
         r"Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\GlobalFlag",  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
         r"Microsoft\Windows NT\CurrentVersion\SilentProcessExit\*\MonitorProcess",  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
-        r"Software\Microsoft\HtmlHelp Author\location"  # http://www.hexacorn.com/blog/2018/04/22/beyond-good-ol-run-key-part-76/
+        r"Software\Microsoft\HtmlHelp Author\location",  # http://www.hexacorn.com/blog/2018/04/22/beyond-good-ol-run-key-part-76/
+        r"Microsoft\PushRouter\Test\TestDllPath2"  # http://www.hexacorn.com/blog/2018/10/10/beyond-good-ol-run-key-part-91/
     ]
 
     QUERY_KEY_LIST = [
