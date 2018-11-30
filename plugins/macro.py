@@ -10,6 +10,7 @@ http://az4n6.blogspot.com/2016/02/more-on-trust-records-macros-and.html
 import argparse
 import urllib.parse as ul
 from md.parser import *
+from urllib.parse import unquote_plus
 
 """
 TO DO:

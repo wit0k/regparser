@@ -156,6 +156,22 @@ class apt(object):
             ]
 
 
+        },
+        '#8': {
+            'author': 'wit0k',
+            'description': 'Privilege Escalation',
+            'signature_category': 'Elevation',
+            'hive_type': 'NTUSER',
+            'value_name_path': r'System\CurrentControlSet\*\ImagePath',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2tm2AVY ',  # https://www.tarlogic.com/en/blog/abusing-seloaddriverprivilege-for-privilege-escalation/
+            'value_content_decoder': None,
+            'action': [
+                {'name': 'query_values', 'items': [r'ImagePath']},
+                {'name': 'query_keys', 'items': ['System\CurrentControlSet\*']}
+            ]
+
         }
     }
 

@@ -482,7 +482,7 @@ class parser(object):
             file_parent_folder = os.path.dirname(input_path)
             if file_extension in supported_archive_extensions():
                 decompress(input_path)
-                return self.scan_input_path(file_parent_folder, input_path, True)
+                return self._scan_input_path(file_parent_folder, input_path, True)
             else:
                 return [input_path]
 

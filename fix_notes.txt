@@ -191,3 +191,23 @@ FIX 0.8.1:
 
 FIX 0.8.2:
 - Autoruns: r"Microsoft\PushRouter\Test\TestDllPath2"  # http://www.hexacorn.com/blog/2018/10/10/beyond-good-ol-run-key-part-91/
+
+FIX 0.8.4:
+- Plugin: apt -> new rule:
+
+        '#8': {
+            'author': 'wit0k',
+            'description': 'Privilege Escalation',
+            'signature_category': 'Elevation',
+            'hive_type': 'NTUSER',
+            'value_name_path': r'System\CurrentControlSet\*\ImagePath',
+            'shall_exist': False,
+            'expected_value_content': None,
+            'reference': 'https://bit.ly/2tm2AVY ',  # https://www.tarlogic.com/en/blog/abusing-seloaddriverprivilege-for-privilege-escalation/
+            'value_content_decoder': None,
+            'action': [
+                {'name': 'query_values', 'items': [r'ImagePath']},
+                {'name': 'query_keys', 'items': ['System\CurrentControlSet\*']}
+            ]
+
+        }
