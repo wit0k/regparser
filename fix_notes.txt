@@ -211,3 +211,6 @@ FIX 0.8.4:
             ]
 
         }
+
+FIX 0.8.5:
+- Autoruns: r"Microsoft\Windows NT\CurrentVersion\ICM\Calibration\DisplayCalibrator"  # https://twitter.com/James_inthe_box/status/1084982201496657921?s=03

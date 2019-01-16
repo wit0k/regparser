@@ -96,7 +96,8 @@ class autoruns(object):
         r"Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\GlobalFlag",  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
         r"Microsoft\Windows NT\CurrentVersion\SilentProcessExit\*\MonitorProcess",  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
         r"Software\Microsoft\HtmlHelp Author\location",  # http://www.hexacorn.com/blog/2018/04/22/beyond-good-ol-run-key-part-76/
-        r"Microsoft\PushRouter\Test\TestDllPath2"  # http://www.hexacorn.com/blog/2018/10/10/beyond-good-ol-run-key-part-91/
+        r"Microsoft\PushRouter\Test\TestDllPath2",  # http://www.hexacorn.com/blog/2018/10/10/beyond-good-ol-run-key-part-91/
+        r"Microsoft\Windows NT\CurrentVersion\ICM\Calibration\DisplayCalibrator"  # https://twitter.com/James_inthe_box/status/1084982201496657921?s=03
     ]
 
     QUERY_KEY_LIST = [
@@ -168,7 +169,9 @@ class autoruns(object):
         r"Software\Microsoft\Office Test\Special\Perf",  # http://www.hexacorn.com/blog/2014/04/16/beyond-good-ol-run-key-part-10/
         r"ControlSet001\Control\Lsa\Notification Packages",
         r"ControlSet002\Control\Lsa\Notification Packages",
-        r"ControlSet003\Control\Lsa\Notification Packages"  # https://attack.mitre.org/wiki/Technique/T1174
+        r"ControlSet003\Control\Lsa\Notification Packages",  # https://attack.mitre.org/wiki/Technique/T1174
+        r"Microsoft\Windows NT\CurrentVersion\ICM\Calibration\DisplayCalibrator"  # https://twitter.com/James_inthe_box/status/1084982201496657921?s=03
+
     ]
 
     def __init__(self, plugin, regparser):

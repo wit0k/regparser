@@ -1,3 +1,6 @@
+import time
+import md.mem_profile as mem
+
 import os
 import re
 import hashlib
@@ -1017,6 +1020,9 @@ class parser(object):
         """ Load hive - would return the object of type: _registry_hive() """
         registry_hive = self._load_hive(hive_file)
 
+        print('Memory (Before): {}Mb'.format(mem.memory_usage_psutil()))
+        t1 = time.clock()
+
         if not registry_hive:
             return ERROR_PARSER_REG_HIVE_NOT_SUPPORTED
 
@@ -1024,6 +1030,10 @@ class parser(object):
             self._search_registry_cs(registry_hive, registry_hive.reg.root())
         else:
             self._search_registry_ci(registry_hive, registry_hive.reg.root())
+
+        t2 = time.clock()
+        print('Memory (After): {}Mb'.format(mem.memory_usage_psutil()))
+        print('Took {} Seconds'.format(t2 - t1))
 
 
 class _objects_matched(parser):
@@ -1124,7 +1134,7 @@ class _search_criteria():
                     entries.append(_search_entry(regex_object, content_type, content_format))
 
                 if content_format == "BIN":
-                    unicode_string = bytes(param, "utf-8").decode('unicode-escape').encode("utf-16le")
+
                     entries.append(_search_entry(unicode_string, content_type, content_format))
 
                 if content_format == "SIZE":  # Applicable for value content size only
