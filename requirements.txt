@@ -7,4 +7,3 @@ python-dateutil==2.7.3
 six==1.11.0
 SQLAlchemy==1.2.11
 unicodecsv==0.14.1
-yarp==1.0.25
