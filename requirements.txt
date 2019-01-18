@@ -1,5 +1,10 @@
+bitstring==3.1.5
 enum34==1.1.6
+psutil==5.4.8
+Pympler==0.6
 python-dateutil==2.7.3
 -e git+https://github.com/williballenthin/python-registry.git@c6e75fb2dce809ceba4590cd5a82ef4ac00e4abe#egg=python_registry
 six==1.11.0
+SQLAlchemy==1.2.11
 unicodecsv==0.14.1
+yarp==1.0.25
