@@ -170,7 +170,6 @@ class autoruns(object):
         r"ControlSet001\Control\Lsa\Notification Packages",
         r"ControlSet002\Control\Lsa\Notification Packages",
         r"ControlSet003\Control\Lsa\Notification Packages",  # https://attack.mitre.org/wiki/Technique/T1174
-        r"Microsoft\Windows NT\CurrentVersion\ICM\Calibration\DisplayCalibrator"  # https://twitter.com/James_inthe_box/status/1084982201496657921?s=03
 
     ]
 
