@@ -97,7 +97,10 @@ class autoruns(object):
         r"Microsoft\Windows NT\CurrentVersion\SilentProcessExit\*\MonitorProcess",  # https://oddvar.moe/2018/04/10/persistence-using-globalflags-in-image-file-execution-options-hidden-from-autoruns-exe/
         r"Software\Microsoft\HtmlHelp Author\location",  # http://www.hexacorn.com/blog/2018/04/22/beyond-good-ol-run-key-part-76/
         r"Microsoft\PushRouter\Test\TestDllPath2",  # http://www.hexacorn.com/blog/2018/10/10/beyond-good-ol-run-key-part-91/
-        r"Microsoft\Windows NT\CurrentVersion\ICM\Calibration\DisplayCalibrator"  # https://twitter.com/James_inthe_box/status/1084982201496657921?s=03
+        r"Microsoft\Windows NT\CurrentVersion\ICM\Calibration\DisplayCalibrator",  # https://twitter.com/James_inthe_box/status/1084982201496657921?s=03
+        r"ControlSet001\services\TermService\Parameters\ServiceDll", #  https://twitter.com/SBousseaden/status/1090411586139885568?s=03
+        r"ControlSet002\services\TermService\Parameters\ServiceDll",
+        r"ControlSet003\services\TermService\Parameters\ServiceDll"
     ]
 
     QUERY_KEY_LIST = [
