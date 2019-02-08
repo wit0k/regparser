@@ -221,3 +221,6 @@ FIX 0.8.6:
 r"ControlSet001\services\TermService\Parameters\ServiceDll",
 r"ControlSet002\services\TermService\Parameters\ServiceDll",
 r"ControlSet003\services\TermService\Parameters\ServiceDll"  # https://twitter.com/SBousseaden/status/1090411586139885568?s=03
+
+FIX 0.8.7:
+- Removing memory profiler for registry search function ... it's causing some dependency issues

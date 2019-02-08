@@ -1,5 +1,5 @@
-import time
-import md.mem_profile as mem
+#import time
+#import md.mem_profile as mem
 
 import os
 import re
@@ -1020,8 +1020,8 @@ class parser(object):
         """ Load hive - would return the object of type: _registry_hive() """
         registry_hive = self._load_hive(hive_file)
 
-        print('Memory (Before): {}Mb'.format(mem.memory_usage_psutil()))
-        t1 = time.clock()
+        #print('Memory (Before): {}Mb'.format(mem.memory_usage_psutil()))
+        #t1 = time.clock()
 
         if not registry_hive:
             return ERROR_PARSER_REG_HIVE_NOT_SUPPORTED
@@ -1031,9 +1031,9 @@ class parser(object):
         else:
             self._search_registry_ci(registry_hive, registry_hive.reg.root())
 
-        t2 = time.clock()
-        print('Memory (After): {}Mb'.format(mem.memory_usage_psutil()))
-        print('Took {} Seconds'.format(t2 - t1))
+        #t2 = time.clock()
+        #print('Memory (After): {}Mb'.format(mem.memory_usage_psutil()))
+        #print('Took {} Seconds'.format(t2 - t1))
 
 
 class _objects_matched(parser):
