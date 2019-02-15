@@ -100,7 +100,10 @@ class autoruns(object):
         r"Microsoft\Windows NT\CurrentVersion\ICM\Calibration\DisplayCalibrator",  # https://twitter.com/James_inthe_box/status/1084982201496657921?s=03
         r"ControlSet001\services\TermService\Parameters\ServiceDll", #  https://twitter.com/SBousseaden/status/1090411586139885568?s=03
         r"ControlSet002\services\TermService\Parameters\ServiceDll",
-        r"ControlSet003\services\TermService\Parameters\ServiceDll"
+        r"ControlSet003\services\TermService\Parameters\ServiceDll",
+        r"ControlSet001\Control\ContentIndex\Language\English_UK\DLLOverridePat",
+        r"ControlSet002\Control\ContentIndex\Language\English_US\DLLOverridePat",
+        r"ControlSet003\Control\ContentIndex\Language\Neutral\DLLOverridePath"
     ]
 
     QUERY_KEY_LIST = [
@@ -173,6 +176,7 @@ class autoruns(object):
         r"ControlSet001\Control\Lsa\Notification Packages",
         r"ControlSet002\Control\Lsa\Notification Packages",
         r"ControlSet003\Control\Lsa\Notification Packages",  # https://attack.mitre.org/wiki/Technique/T1174
+        r'Microsoft\Windows NT\CurrentVersion\WirelessDocking\DockingProviderDLLs'
 
     ]
 

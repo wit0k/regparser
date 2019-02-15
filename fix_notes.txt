@@ -224,3 +224,17 @@ r"ControlSet003\services\TermService\Parameters\ServiceDll"  # https://twitter.c
 
 FIX 0.8.7:
 - Removing memory profiler for registry search function ... it's causing some dependency issues
+
+FIX 0.8.8:
+- Autoruns: New LPs from Hexacorn
+
+Key:
+
+r'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WirelessDocking\DockingProviderDLLs'
+
+Values:
+
+r'HKLM\System\CurrentControlSet\Control\ContentIndex\Language\English_UK\DLLOverridePat',
+r'HKLM\System\CurrentControlSet\Control\ContentIndex\Language\English_US\DLLOverridePat',
+r'HKLM\System\CurrentControlSet\Control\ContentIndex\Language\Neutral\DLLOverridePath'
+
