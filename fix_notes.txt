@@ -238,3 +238,9 @@ r'HKLM\System\CurrentControlSet\Control\ContentIndex\Language\English_UK\DLLOver
 r'HKLM\System\CurrentControlSet\Control\ContentIndex\Language\English_US\DLLOverridePat',
 r'HKLM\System\CurrentControlSet\Control\ContentIndex\Language\Neutral\DLLOverridePath'
 
+FIX 0.8.9:
+- Autoruns: New LPs from Hexacorn
+
+    r'Microsoft\Windows\CurrentVersion\Installer\RunOnceEntries',
+    r'Wow6432Node\Microsoft\Windows\CurrentVersion\Installer\RunOnceEntries'
+
