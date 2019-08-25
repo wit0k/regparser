@@ -244,3 +244,7 @@ FIX 0.8.9:
     r'Microsoft\Windows\CurrentVersion\Installer\RunOnceEntries',
     r'Wow6432Node\Microsoft\Windows\CurrentVersion\Installer\RunOnceEntries'
 
+FIX 0.9.0:
+- Autoruns: New LPs from Hexacorn
+
+    r'Software\Microsoft\Run'  # https://brica.de/alerts/alert/public/1250345/evading-av-with-javascript-obfuscation/

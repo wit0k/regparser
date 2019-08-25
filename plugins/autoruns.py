@@ -176,7 +176,8 @@ class autoruns(object):
         r"ControlSet001\Control\Lsa\Notification Packages",
         r"ControlSet002\Control\Lsa\Notification Packages",
         r"ControlSet003\Control\Lsa\Notification Packages",  # https://attack.mitre.org/wiki/Technique/T1174
-        r'Microsoft\Windows NT\CurrentVersion\WirelessDocking\DockingProviderDLLs'
+        r'Microsoft\Windows NT\CurrentVersion\WirelessDocking\DockingProviderDLLs',
+        r'Software\Microsoft\Run'  # https://brica.de/alerts/alert/public/1250345/evading-av-with-javascript-obfuscation/
 
     ]
 
