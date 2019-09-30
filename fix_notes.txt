@@ -248,3 +248,16 @@ FIX 0.9.0:
 - Autoruns: New LPs from Hexacorn
 
     r'Software\Microsoft\Run'  # https://brica.de/alerts/alert/public/1250345/evading-av-with-javascript-obfuscation/
+
+
+
+FIX 0.9.1:
+- Autoruns: LPs from Hexacorn
+Values:
+
+r'Microsoft\Windows\Windows Error Reporting\Hangs\Debugger'  # http://www.hexacorn.com/blog/2019/09/20/beyond-good-ol-run-key-part-116/
+
+Keys:
+
+r'Software\Microsoft\Microsoft SQL Server\*\Tools\Shell\Addins',
+r'Microsoft\Microsoft SQL Server\*\Tools\Shell\Addins'

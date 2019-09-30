@@ -103,7 +103,8 @@ class autoruns(object):
         r"ControlSet003\services\TermService\Parameters\ServiceDll",
         r"ControlSet001\Control\ContentIndex\Language\English_UK\DLLOverridePat",
         r"ControlSet002\Control\ContentIndex\Language\English_US\DLLOverridePat",
-        r"ControlSet003\Control\ContentIndex\Language\Neutral\DLLOverridePath"
+        r"ControlSet003\Control\ContentIndex\Language\Neutral\DLLOverridePath",
+        r'Microsoft\Windows\Windows Error Reporting\Hangs\Debugger'  # http://www.hexacorn.com/blog/2019/09/20/beyond-good-ol-run-key-part-116/
     ]
 
     QUERY_KEY_LIST = [
@@ -177,7 +178,9 @@ class autoruns(object):
         r"ControlSet002\Control\Lsa\Notification Packages",
         r"ControlSet003\Control\Lsa\Notification Packages",  # https://attack.mitre.org/wiki/Technique/T1174
         r'Microsoft\Windows NT\CurrentVersion\WirelessDocking\DockingProviderDLLs',
-        r'Software\Microsoft\Run'  # https://brica.de/alerts/alert/public/1250345/evading-av-with-javascript-obfuscation/
+        r'Software\Microsoft\Run'  # https://brica.de/alerts/alert/public/1250345/evading-av-with-javascript-obfuscation/,
+        r'Software\Microsoft\Microsoft SQL Server\*\Tools\Shell\Addins',
+        r'Microsoft\Microsoft SQL Server\*\Tools\Shell\Addins'
 
     ]
 
