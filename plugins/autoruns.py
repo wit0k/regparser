@@ -104,7 +104,8 @@ class autoruns(object):
         r"ControlSet001\Control\ContentIndex\Language\English_UK\DLLOverridePat",
         r"ControlSet002\Control\ContentIndex\Language\English_US\DLLOverridePat",
         r"ControlSet003\Control\ContentIndex\Language\Neutral\DLLOverridePath",
-        r'Microsoft\Windows\Windows Error Reporting\Hangs\Debugger'  # http://www.hexacorn.com/blog/2019/09/20/beyond-good-ol-run-key-part-116/
+        r'Microsoft\Windows\Windows Error Reporting\Hangs\Debugger',  # http://www.hexacorn.com/blog/2019/09/20/beyond-good-ol-run-key-part-116/
+        r"Microsoft\Windows NT\CurrentVersion\AeDebugProtected\ProtectedDebugger"  # http://www.hexacorn.com/blog/2019/10/11/beyond-good-ol-run-key-part-119/
     ]
 
     QUERY_KEY_LIST = [
