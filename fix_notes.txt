@@ -261,3 +261,9 @@ Keys:
 
 r'Software\Microsoft\Microsoft SQL Server\*\Tools\Shell\Addins',
 r'Microsoft\Microsoft SQL Server\*\Tools\Shell\Addins'
+
+FIX 0.9.2:
+- Autoruns: LPs from Hexacorn
+Values:
+
+r"Microsoft\Windows NT\CurrentVersion\AeDebugProtected\ProtectedDebugger"  # http://www.hexacorn.com/blog/2019/10/11/beyond-good-ol-run-key-part-119/
